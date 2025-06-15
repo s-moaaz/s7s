@@ -14,19 +14,11 @@
     body {
       margin: 0;
       font-family: 'Cairo', sans-serif;
-      background: linear-gradient(-45deg, #1e1e2f, #2b2d42, #3f3d56, #4b3f72);
-      background-size: 400% 400%;
-      animation: gradientBG 10s ease infinite;
+      background: linear-gradient(135deg, #1c1b2a, #2e2f45);
       color: #ffffff;
       direction: rtl;
       text-align: right;
       overflow-x: hidden;
-    }
-
-    @keyframes gradientBG {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
     }
 
     header {
@@ -48,25 +40,18 @@
 
     section {
       margin-bottom: 50px;
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(255, 255, 255, 0.08);
       padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease;
-    }
-
-    section.show {
-      opacity: 1;
-      transform: translateY(0);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      animation: fadeInUp 1s ease forwards;
     }
 
     section h2 {
       font-size: 2rem;
       margin-bottom: 20px;
-      color: #00d9ff;
-      border-bottom: 2px solid #00d9ff;
+      color: #0f62fe;
+      border-bottom: 2px solid #0f62fe;
       padding-bottom: 10px;
     }
 
@@ -84,25 +69,18 @@
     .gallery img {
       width: 100%;
       border-radius: 15px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
       cursor: pointer;
-      transition: transform 0.5s ease, filter 0.5s ease, opacity 0.5s ease;
-      opacity: 0;
-      transform: translateY(50px);
-    }
-
-    .gallery img.show {
-      opacity: 1;
-      transform: translateY(0);
+      transition: transform 0.3s ease, filter 0.3s ease;
     }
 
     .gallery img:hover {
-      transform: scale(1.05) rotate(1deg);
+      transform: scale(1.05) rotate(2deg);
       filter: brightness(1.1);
     }
 
     .btn {
-      background-color: #00d9ff;
+      background-color: #0f62fe;
       color: white;
       padding: 12px 24px;
       margin-top: 20px;
@@ -117,16 +95,13 @@
     }
 
     .btn:hover {
-      background-color: #00aacc;
+      background-color: #0844b8;
     }
 
     form {
       display: flex;
       flex-direction: column;
       gap: 15px;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
     }
 
     input, select {
@@ -143,22 +118,17 @@
       color: #aaa;
       padding: 25px 20px;
       text-align: center;
-      border-top: 2px solid #00d9ff;
+      border-top: 2px solid #0f62fe;
     }
 
-    .mute-btn {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background: #00d9ff;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 30px;
-      cursor: pointer;
-      font-weight: bold;
-      z-index: 999;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    @keyframes slideInDown {
+      0% { opacity: 0; transform: translateY(-100%); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -187,10 +157,10 @@
   <section id="gallery">
     <h2>معرض الصور</h2>
     <div class="gallery">
-      <img src="https://i.imgur.com/3Y1ZpEF.jpg" alt="صورة من اللعب 1" />
-      <img src="https://i.imgur.com/L3NzK7Z.jpg" alt="صورة من اللعب 2" />
-      <img src="https://i.imgur.com/2sHSPo5.jpg" alt="صورة من اللعب 3" />
-      <img src="https://i.imgur.com/Q9qFtpc.jpg" alt="صورة من اللعب 4" />
+      <img src="https://i.imgur.com/TtljsZD.jpg" alt="صورة من اللعب 1" />
+      <img src="https://i.imgur.com/lokOkJ4.jpg" alt="صورة من اللعب 2" />
+      <img src="https://i.imgur.com/X7lBfRp.jpg" alt="صورة من اللعب 3" />
+      <img src="https://i.imgur.com/fvINbdO.jpg" alt="صورة من اللعب 4" />
     </div>
   </section>
 
@@ -218,38 +188,22 @@
   جميع الحقوق محفوظة &copy; 2025 عائلة البشوات
 </footer>
 
-<!-- 🎵 الموسيقى + زر ميوت -->
-<audio id="bg-music" autoplay loop>
-  <source src="https://cdn1.suno.ai/drCCtpEY4fbONLeR.mp3" type="audio/mpeg">
+<!-- 🎵 تشغيل الصوت -->
+<audio id="track1" autoplay>
+  <source src="https://voca.ro/1laMmfRdtewn.mp3" type="audio/mpeg">
 </audio>
-<button class="mute-btn" onclick="toggleMute()">🔇 إيقاف الموسيقى</button>
+
+<audio id="track2">
+  <source src="https://voca.ro/1dqPGj3x307g.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-  // Animation on scroll
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("show");
-      }
-    });
-  }, {
-    threshold: 0.1
+  const track1 = document.getElementById("track1");
+  const track2 = document.getElementById("track2");
+
+  track1.addEventListener("ended", function() {
+    track2.play();
   });
-
-  document.querySelectorAll("section, .gallery img").forEach(el => observer.observe(el));
-
-  // Mute button toggle
-  const audio = document.getElementById("bg-music");
-  const muteBtn = document.querySelector(".mute-btn");
-  function toggleMute() {
-    if (audio.muted) {
-      audio.muted = false;
-      muteBtn.innerHTML = "🔇 إيقاف الموسيقى";
-    } else {
-      audio.muted = true;
-      muteBtn.innerHTML = "🔊 تشغيل الموسيقى";
-    }
-  }
 </script>
 
 </body>
