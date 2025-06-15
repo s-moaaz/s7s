@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>عائلة البشوات - FiveM سيرفر بلاين</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(45deg, #1e1e2f, #28293d);
+      color: #ffffff;
+      direction: rtl;
+      text-align: right;
+      overflow-x: hidden;
+      transition: background 0.5s ease;
+    }
+
+    header {
+      background: #0f62fe;
+      padding: 30px 20px;
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      animation: slideInDown 1s ease forwards;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 40px auto 80px auto;
+      padding: 0 20px;
+    }
+
+    section {
+      margin-bottom: 50px;
+      background: rgba(255, 255, 255, 0.07);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #0f62fe;
+      border-bottom: 2px solid #0f62fe;
+      padding-bottom: 10px;
+    }
+
+    section p {
+      font-size: 1.2rem;
+      line-height: 1.7;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      gap: 20px;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      animation: floatAnim 4s ease-in-out infinite;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05) rotate(2deg);
+      filter: brightness(1.1);
+    }
+
+    @keyframes floatAnim {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .btn {
+      background-color: #0f62fe;
+      color: white;
+      padding: 12px 24px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      background-color: #0844b8;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input, select {
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: none;
+    }
+
+    footer {
+      background: rgba(0, 0, 0, 0.9);
+      color: #aaa;
+      padding: 25px 20px;
+      text-align: center;
+      border-top: 2px solid #0f62fe;
+      font-size: 0.9rem;
+    }
+
+    /* مشغل الصوت */
+    .audio-player {
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .audio-controls button {
+      background: #0f62fe;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      margin: 0 10px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .audio-controls button:hover {
+      background: #0844b8;
+    }
+
+    .volume-slider {
+      width: 150px;
+      vertical-align: middle;
+      margin-left: 15px;
+    }
+
+    @keyframes slideInDown {
+      0% { opacity: 0; transform: translateY(-100%); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  عائلة البشوات - سيرفر بلاين FiveM
+</header>
+
+<main>
+  <section id="about">
+    <h2>من نحن؟</h2>
+    <p>
+      نحن عائلة البشوات، عائلة مصرية محترفة في عالم FiveM على سيرفر بلاين. نتميز بالتنظيم، التعاون، والروح الحماسية التي تجعل كل مهمة تجربة فريدة من نوعها.
+    </p>
+    <a class="btn" href="https://discord.gg/7BfdcdcmZz" target="_blank">انضم الآن</a>
+  </section>
+
+  <section id="family">
+    <h2>عائلة البشوات</h2>
+    <p>
+      عائلتنا تجمع بين الألفة والاحترام، ونقوم بتنفيذ عمليات سرقة احترافية، بالإضافة إلى تنظيم فعاليات ممتعة ومثيرة لجميع أعضاء العائلة.
+    </p>
+  </section>
+
+  <section id="gallery">
+    <h2>معرض الصور</h2>
+    <div class="gallery">
+      <img src="https://i.imgur.com/s3byOAU.jpg" alt="صورة من اللعب 1" />
+      <img src="https://i.imgur.com/N609dEX.jpg" alt="صورة من اللعب 2" />
+      <img src="https://i.imgur.com/Yye4dYi.jpg" alt="صورة من اللعب 3" />
+    </div>
+  </section>
+
+  <section id="apply">
+    <h2>التقديم على العائلة</h2>
+    <form id="applyForm">
+      <input type="text" placeholder="الاسم الكامل" required />
+      <input type="text" placeholder="مستواك في بلاين" required />
+      <select required>
+        <option value="">هل تمتلك شوزن؟</option>
+        <option value="نعم">نعم</option>
+        <option value="لا">لا</option>
+      </select>
+      <select required>
+        <option value="">هل أنت في عائلة أخرى؟</option>
+        <option value="نعم">نعم</option>
+        <option value="لا">لا</option>
+      </select>
+      <button type="submit" class="btn">إرسال الطلب</button>
+    </form>
+  </section>
+
+  <section class="audio-player">
+    <h2>الموسيقى الخلفية</h2>
+    <audio id="audio" src="https://cdn.discordapp.com/attachments/1130870879392366592/1383809069823033474/2.mp3" crossorigin="anonymous"></audio>
+    <div class="audio-controls">
+      <button id="playBtn">تشغيل</button>
+      <button id="pauseBtn" disabled>إيقاف</button>
+      <label for="volume">الصوت:</label>
+      <input id="volume" type="range" min="0" max="1" step="0.05" value="0.3" class="volume-slider" />
+    </div>
+  </section>
+</main>
+
+<footer>
+  FOUNDER : S7S BASHA | DEVELOPER المبرمج & CO FOUNDER : MUATH BASHA | الادراة STAFF : IBRAHIM | AMR_PROF | -OF_ES-
+</footer>
+
+<script>
+  const audio = document.getElementById('audio');
+  const playBtn = document.getElementById('playBtn');
+  const pauseBtn = document.getElementById('pauseBtn');
+  const volumeSlider = document.getElementById('volume');
+  const body = document.body;
+
+  // ضبط الصوت الابتدائي
+  audio.volume = volumeSlider.value;
+
+  playBtn.addEventListener('click', () => {
+    audio.play();
+    playBtn.disabled = true;
+    pauseBtn.disabled = false;
+    animateBackground(true);
+  });
+
+  pauseBtn.addEventListener('click', () => {
+    audio.pause();
+    playBtn.disabled = false;
+    pauseBtn.disabled = true;
+    animateBackground(false);
+  });
+
+  volumeSlider.addEventListener('input', () => {
+    audio.volume = volumeSlider.value;
+  });
+
+  // تغيير لون الخلفية بشكل متحرك مع الصوت (بسيط جداً)
+  let animId;
+  function animateBackground(playing) {
+    if (!playing) {
+      body.style.background = 'linear-gradient(45deg, #1e1e2f, #28293d)';
+      cancelAnimationFrame(animId);
+      return;
+    }
+    let hue = 0;
+    function frame() {
+      hue = (hue + 1) % 360;
+      body.style.background = `linear-gradient(45deg, hsl(${hue}, 50%, 25%), hsl(${(hue+40)%360}, 50%, 30%))`;
+      animId = requestAnimationFrame(frame);
+    }
+    frame();
+  }
+</script>
+
+</body>
+</html>
