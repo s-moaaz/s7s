@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>عائلة البشوات - FiveM سيرفر بلاين</title>
+  <title>عائلة البشوات - سيرفر بلاين FiveM</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 
@@ -14,11 +14,37 @@
     body {
       margin: 0;
       font-family: 'Cairo', sans-serif;
-      background: linear-gradient(135deg, #1c1b2a, #2e2f45);
-      color: #ffffff;
-      direction: rtl;
-      text-align: right;
+      color: #fff;
+      background: linear-gradient(135deg, #1e1e2f, #28293d);
       overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* خلفية متحركة */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at center, #0f62fe, #00001a);
+      animation: pulse 15s ease-in-out infinite alternate;
+      z-index: -1;
+      opacity: 0.7;
+    }
+
+    @keyframes pulse {
+      0% {
+        filter: hue-rotate(0deg);
+        opacity: 0.6;
+      }
+      50% {
+        filter: hue-rotate(90deg);
+        opacity: 0.9;
+      }
+      100% {
+        filter: hue-rotate(180deg);
+        opacity: 0.6;
+      }
     }
 
     header {
@@ -28,8 +54,9 @@
       font-weight: 700;
       letter-spacing: 2px;
       text-align: center;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
       animation: slideInDown 1s ease forwards;
+      user-select: none;
     }
 
     main {
@@ -40,10 +67,10 @@
 
     section {
       margin-bottom: 50px;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.07);
       padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
       animation: fadeInUp 1s ease forwards;
     }
 
@@ -53,6 +80,7 @@
       color: #0f62fe;
       border-bottom: 2px solid #0f62fe;
       padding-bottom: 10px;
+      user-select: none;
     }
 
     section p {
@@ -69,9 +97,10 @@
     .gallery img {
       width: 100%;
       border-radius: 15px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
       cursor: pointer;
       transition: transform 0.3s ease, filter 0.3s ease;
+      user-select: none;
     }
 
     .gallery img:hover {
@@ -92,6 +121,7 @@
       transition: background-color 0.3s ease;
       text-decoration: none;
       display: inline-block;
+      user-select: none;
     }
 
     .btn:hover {
@@ -105,12 +135,10 @@
     }
 
     input, select {
-      padding: 12px;
+      padding: 10px;
       font-size: 1rem;
       border-radius: 8px;
       border: none;
-      background: #fff;
-      color: #000;
     }
 
     footer {
@@ -119,26 +147,7 @@
       padding: 25px 20px;
       text-align: center;
       border-top: 2px solid #0f62fe;
-    }
-
-    /* زر التحكم بالصوت */
-    #audioControl {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      background: #0f62fe;
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      z-index: 1000;
-      transition: background-color 0.3s ease;
-    }
-
-    #audioControl:hover {
-      background-color: #0844b8;
+      user-select: none;
     }
 
     @keyframes slideInDown {
@@ -150,6 +159,30 @@
       0% { opacity: 0; transform: translateY(30px); }
       100% { opacity: 1; transform: translateY(0); }
     }
+
+    /* صوتيات */
+    .audio-controls {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .audio-btn {
+      background: #0f62fe;
+      border: none;
+      color: white;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      font-size: 1rem;
+    }
+
+    .audio-btn:hover {
+      background-color: #0844b8;
+    }
   </style>
 </head>
 <body>
@@ -158,15 +191,13 @@
   عائلة البشوات - سيرفر بلاين FiveM
 </header>
 
-<button id="audioControl">إيقاف الصوت</button>
-
 <main>
   <section id="about">
     <h2>من نحن؟</h2>
     <p>
       نحن عائلة البشوات، عائلة مصرية محترفة في عالم FiveM على سيرفر بلاين. نتميز بالتنظيم، التعاون، والروح الحماسية التي تجعل كل مهمة تجربة فريدة من نوعها.
     </p>
-    <a class="btn" href="https://discord.gg/7BfdcdcmZz" target="_blank">انضم الآن</a>
+    <a class="btn" href="https://discord.gg/7BfdcdcmZz" target="_blank" rel="noopener noreferrer">انضم الآن</a>
   </section>
 
   <section id="family">
@@ -180,10 +211,29 @@
     <h2>معرض الصور</h2>
     <div class="gallery">
       <img src="https://i.imgur.com/TtljsZD.jpg" alt="صورة من اللعب 1" />
-      <img src="https://i.imgur.com/lokOkJ4.jpg" alt="صورة من اللعب 2" />
+      <img src="https://i.imgur.com/TtljsZD.jpg" alt="صورة من اللعب 2" />
       <img src="https://i.imgur.com/X7lBfRp.jpg" alt="صورة من اللعب 3" />
-      <img src="https://i.imgur.com/fvINbdO.jpg" alt="صورة من اللعب 4" />
+      <img src="https://imgur.com/a/Rb7j2hz.jpg" alt="صورة من اللعب 4" />
     </div>
+  </section>
+
+  <section id="audio-section">
+    <h2>موسيقى الخلفية</h2>
+
+    <div class="audio-controls">
+      <button class="audio-btn" onclick="toggleAudio('audio1', this)">تشغيل / إيقاف الموسيقى 1</button>
+      <button class="audio-btn" onclick="toggleAudio('audio2', this)">تشغيل / إيقاف الموسيقى 2</button>
+    </div>
+
+    <audio id="audio1" loop>
+      <source src="https://cdn.discordapp.com/attachments/1130870879392366592/1383809069823033474/2.mp3?ex=68502420&is=684ed2a0&hm=8d60310b5852723ab3241c621e85f5a07e5bcd359418c6d95dbf7842a033a2be&" type="audio/mpeg" />
+      متصفحك لا يدعم تشغيل الصوت.
+    </audio>
+
+    <audio id="audio2" loop>
+      <source src="https://cdn.discordapp.com/attachments/1130870879392366592/1383809412136701962/3.mp3?ex=68502471&is=684ed2f1&hm=c1f6e9c335dcb5da4cd126512b0c61f3a9c6ce8336d2771a2c10fe77703ed717&" type="audio/mpeg" />
+      متصفحك لا يدعم تشغيل الصوت.
+    </audio>
   </section>
 
   <section id="apply">
@@ -210,40 +260,21 @@
   جميع الحقوق محفوظة &copy; 2025 عائلة البشوات
 </footer>
 
-<!-- 🎵 تشغيل الصوت -->
-<audio id="track1" autoplay>
-  <source src="https://voca.ro/1laMmfRdtewn.mp3" type="audio/mpeg">
-</audio>
-
-<audio id="track2">
-  <source src="https://voca.ro/1dqPGj3x307g.mp3" type="audio/mpeg">
-</audio>
-
 <script>
-  const track1 = document.getElementById("track1");
-  const track2 = document.getElementById("track2");
-  const audioControl = document.getElementById("audioControl");
-  let isPlaying = true;
-
-  track1.addEventListener("ended", function() {
-    track2.play();
-  });
-
-  audioControl.addEventListener("click", () => {
-    if (isPlaying) {
-      track1.pause();
-      track2.pause();
-      audioControl.textContent = "تشغيل الصوت";
+  function toggleAudio(id, btn) {
+    const audio = document.getElementById(id);
+    if (audio.paused) {
+      // وقّف أي موسيقى تانية شغالة قبل تشغيل هذا الصوت
+      document.querySelectorAll('audio').forEach(a => {
+        if (a !== audio) a.pause();
+      });
+      audio.play();
+      btn.textContent = "إيقاف الموسيقى " + (id === 'audio1' ? "1" : "2");
     } else {
-      if (track1.ended) {
-        track2.play();
-      } else {
-        track1.play();
-      }
-      audioControl.textContent = "إيقاف الصوت";
+      audio.pause();
+      btn.textContent = "تشغيل / إيقاف الموسيقى " + (id === 'audio1' ? "1" : "2");
     }
-    isPlaying = !isPlaying;
-  });
+  }
 </script>
 
 </body>
