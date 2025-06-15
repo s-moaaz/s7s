@@ -121,6 +121,26 @@
       border-top: 2px solid #0f62fe;
     }
 
+    /* زر التحكم بالصوت */
+    #audioControl {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background: #0f62fe;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      z-index: 1000;
+      transition: background-color 0.3s ease;
+    }
+
+    #audioControl:hover {
+      background-color: #0844b8;
+    }
+
     @keyframes slideInDown {
       0% { opacity: 0; transform: translateY(-100%); }
       100% { opacity: 1; transform: translateY(0); }
@@ -137,6 +157,8 @@
 <header>
   عائلة البشوات - سيرفر بلاين FiveM
 </header>
+
+<button id="audioControl">إيقاف الصوت</button>
 
 <main>
   <section id="about">
@@ -200,9 +222,27 @@
 <script>
   const track1 = document.getElementById("track1");
   const track2 = document.getElementById("track2");
+  const audioControl = document.getElementById("audioControl");
+  let isPlaying = true;
 
   track1.addEventListener("ended", function() {
     track2.play();
+  });
+
+  audioControl.addEventListener("click", () => {
+    if (isPlaying) {
+      track1.pause();
+      track2.pause();
+      audioControl.textContent = "تشغيل الصوت";
+    } else {
+      if (track1.ended) {
+        track2.play();
+      } else {
+        track1.play();
+      }
+      audioControl.textContent = "إيقاف الصوت";
+    }
+    isPlaying = !isPlaying;
   });
 </script>
 
