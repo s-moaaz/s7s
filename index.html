@@ -63,7 +63,7 @@
 
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
     }
 
@@ -127,7 +127,6 @@
       font-size: 0.9rem;
     }
 
-    /* مشغل الصوت */
     .audio-player {
       margin-top: 15px;
       text-align: center;
@@ -218,7 +217,7 @@
 
   <section class="audio-player">
     <h2>الموسيقى الخلفية</h2>
-    <audio id="audio" src="https://cdn.discordapp.com/attachments/1130870879392366592/1383809069823033474/2.mp3?ex=68502420&is=684ed2a0&hm=8d60310b5852723ab3241c621e85f5a07e5bcd359418c6d95dbf7842a033a2be&" type="audio/mpeg" crossorigin="anonymous"></audio>
+    <audio id="audio" type="audio/mpeg"></audio>
     <div class="audio-controls">
       <button id="playBtn">تشغيل</button>
       <button id="pauseBtn" disabled>إيقاف</button>
@@ -230,20 +229,35 @@
 
 <footer>
   FOUNDER : S7S BASHA | 
-DEVELOPER & CO FOUNDER : MUATH BASHA |
- الادراة STAFF : IBRAHIM | AMR_PROF | -OF_ES-
-"جميع الحقوق محفوظة © عائلة البشوات 2025"
+  DEVELOPER & CO FOUNDER : MUATH BASHA |
+  الادراة STAFF : IBRAHIM | AMR_PROF | -OF_ES-
+  <br>
+  "جميع الحقوق محفوظة © عائلة البشوات 2025"
 </footer>
 
 <script>
+  const playlist = [
+    "https://cdn.discordapp.com/attachments/1130870879392366592/1383809069823033474/2.mp3",
+    "https://cdn.discordapp.com/attachments/1130870879392366592/1383809412136701962/3.mp3"
+  ];
+
   const audio = document.getElementById('audio');
   const playBtn = document.getElementById('playBtn');
   const pauseBtn = document.getElementById('pauseBtn');
   const volumeSlider = document.getElementById('volume');
   const body = document.body;
 
-  // ضبط الصوت الابتدائي
+  let currentTrack = 0;
+  let animId;
+
+  audio.src = playlist[currentTrack];
   audio.volume = volumeSlider.value;
+
+  audio.addEventListener('ended', () => {
+    currentTrack = (currentTrack + 1) % playlist.length;
+    audio.src = playlist[currentTrack];
+    audio.play();
+  });
 
   playBtn.addEventListener('click', () => {
     audio.play();
@@ -263,8 +277,6 @@ DEVELOPER & CO FOUNDER : MUATH BASHA |
     audio.volume = volumeSlider.value;
   });
 
-  // تغيير لون الخلفية بشكل متحرك مع الصوت (بسيط جداً)
-  let animId;
   function animateBackground(playing) {
     if (!playing) {
       body.style.background = 'linear-gradient(45deg, #1e1e2f, #28293d)';
@@ -274,7 +286,7 @@ DEVELOPER & CO FOUNDER : MUATH BASHA |
     let hue = 0;
     function frame() {
       hue = (hue + 1) % 360;
-      body.style.background = `linear-gradient(45deg, hsl(${hue}, 50%, 25%), hsl(${(hue+40)%360}, 50%, 30%))`;
+      body.style.background = `linear-gradient(45deg, hsl(${hue}, 50%, 25%), hsl(${(hue + 40) % 360}, 50%, 30%))`;
       animId = requestAnimationFrame(frame);
     }
     frame();
