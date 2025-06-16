@@ -200,7 +200,7 @@
     <h2>التقديم على العائلة</h2>
     <form id="applyForm">
       <input type="text" placeholder="الاسم الكامل" required />
-      <input type="text" placeholder="Discord ID (مثال: 123456789012345678)" required />
+      <input type="text" placeholder="Discord ID أو الاسم (مثال: 123456789012345678 أو Muaz#1234)" required />
       <input type="text" placeholder="مستواك في بلاين" required />
       <select required>
         <option value="">هل تمتلك شوزن؟</option>
@@ -292,34 +292,36 @@
     }
     frame();
   }
-</script>
 
-<script>
-  // Webhook ديسكورد - عشان ترسل الإيمبد مع المنشن
+  // FORM & DISCORD WEBHOOK
+  const webhookURL = 'YOUR_WEBHOOK_URL_HERE'; // غيره بالويبهوك الخاص بك
+
   const applyForm = document.getElementById('applyForm');
-  const webhookURL = 'https://discord.com/api/webhooks/1384279567857881098/yjX5zZwLVT3RPhPfaRSw7ocGCifax1GgtHuBFN8CVNaSXlO7YqCSHYgi3XjCuA-C6ZzI'; // حط هنا رابط Webhook الخاص بالروم عندك
-
   applyForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // جمع البيانات من الفورم
-    const name = applyForm.querySelector('input[type="text"]:nth-of-type(1)').value;
-    const discordId = applyForm.querySelector('input[type="text"]:nth-of-type(2)').value;
-    const level = applyForm.querySelector('input[type="text"]:nth-of-type(3)').value;
+    const name = applyForm.querySelector('input[type="text"]:nth-of-type(1)').value.trim();
+    const discordInput = applyForm.querySelector('input[type="text"]:nth-of-type(2)').value.trim();
+    const level = applyForm.querySelector('input[type="text"]:nth-of-type(3)').value.trim();
     const ownsShozen = applyForm.querySelector('select:nth-of-type(1)').value;
     const inOtherFamily = applyForm.querySelector('select:nth-of-type(2)').value;
 
-    // محتوى المنشن للرول
     const roleId = '1384281802687905873';
-    const content = `<@&${roleId}>`;
 
-    // بناء الإيمبد
+    // إذا الإدخال هو رقم Discord ID نعمل منشن
+    let mentionText = discordInput;
+    if (/^\d{17,19}$/.test(discordInput)) {
+      mentionText = `<@${discordInput}>`;
+    }
+
+    const content = `${mentionText} <@&${roleId}>`;
+
     const embed = {
       title: "طلب تقديم جديد لعائلة البشوات",
       color: 3447003,
       fields: [
         { name: "الاسم الكامل", value: name, inline: true },
-        { name: "Discord ID", value: discordId, inline: true },
+        { name: "Discord ID أو الاسم", value: discordInput, inline: true },
         { name: "المستوى في بلاين", value: level, inline: true },
         { name: "هل تمتلك شوزن؟", value: ownsShozen, inline: true },
         { name: "هل أنت في عائلة أخرى؟", value: inOtherFamily, inline: true },
@@ -332,9 +334,7 @@
     try {
       const response = await fetch(webhookURL, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content, embeds: [embed] })
       });
 
