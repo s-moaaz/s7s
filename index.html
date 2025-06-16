@@ -167,189 +167,191 @@
 </head>
 <body>
 
-<header>
-  عائلة البشوات - سيرفر بلاين FiveM
-</header>
+  <header>
+    عائلة البشوات - سيرفر بلاين FiveM
+  </header>
 
-<main>
-  <section id="about">
-    <h2>من نحن؟</h2>
-    <p>
-      نحن عائلة البشوات، عائلة مصرية محترفة في عالم FiveM على سيرفر بلاين. نتميز بالتنظيم، التعاون، والروح الحماسية التي تجعل كل مهمة تجربة فريدة من نوعها.
-    </p>
-    <a class="btn" href="https://discord.gg/7BfdcdcmZz" target="_blank">انضم الآن</a>
-  </section>
+  <main>
+    <section id="about">
+      <h2>من نحن؟</h2>
+      <p>
+        نحن عائلة البشوات، عائلة مصرية محترفة في عالم FiveM على سيرفر بلاين. نتميز بالتنظيم، التعاون، والروح الحماسية التي تجعل كل مهمة تجربة فريدة من نوعها.
+      </p>
+      <a class="btn" href="https://discord.gg/7BfdcdcmZz" target="_blank">انضم الآن</a>
+    </section>
 
-  <section id="family">
-    <h2>عائلة البشوات</h2>
-    <p>
-      عائلتنا تجمع بين الألفة والاحترام، ونقوم بتنفيذ عمليات سرقة احترافية، بالإضافة إلى تنظيم فعاليات ممتعة ومثيرة لجميع أعضاء العائلة.
-    </p>
-  </section>
+    <section id="family">
+      <h2>عائلة البشوات</h2>
+      <p>
+        عائلتنا تجمع بين الألفة والاحترام، ونقوم بتنفيذ عمليات سرقة احترافية، بالإضافة إلى تنظيم فعاليات ممتعة ومثيرة لجميع أعضاء العائلة.
+      </p>
+    </section>
 
-  <section id="gallery">
-    <h2>معرض الصور</h2>
-    <div class="gallery">
-      <img src="https://i.imgur.com/s3byOAU.jpg" alt="صورة من اللعب 1" />
-      <img src="https://i.imgur.com/N609dEX.jpg" alt="صورة من اللعب 2" />
-      <img src="https://i.imgur.com/Yye4dYi.jpg" alt="صورة من اللعب 3" />
-    </div>
-  </section>
+    <section id="gallery">
+      <h2>معرض الصور</h2>
+      <div class="gallery">
+        <img src="https://i.imgur.com/s3byOAU.jpg" alt="صورة من اللعب 1" />
+        <img src="https://i.imgur.com/N609dEX.jpg" alt="صورة من اللعب 2" />
+        <img src="https://i.imgur.com/Yye4dYi.jpg" alt="صورة من اللعب 3" />
+      </div>
+    </section>
 
-  <section id="apply">
-    <h2>التقديم على العائلة</h2>
-    <form id="applyForm">
-      <input type="text" placeholder="الاسم الكامل" required />
-      <input type="text" placeholder="Discord ID أو الاسم (مثال: 123456789012345678 أو Muaz#1234)" required />
-      <input type="text" placeholder="مستواك في بلاين" required />
-      <select required>
-        <option value="">هل تمتلك شوزن؟</option>
-        <option value="نعم">نعم</option>
-        <option value="لا">لا</option>
-      </select>
-      <select required>
-        <option value="">هل أنت في عائلة أخرى؟</option>
-        <option value="نعم">نعم</option>
-        <option value="لا">لا</option>
-      </select>
-      <button type="submit" class="btn">إرسال الطلب</button>
-    </form>
-  </section>
+    <section id="apply">
+      <h2>التقديم على العائلة</h2>
+      <form id="applyForm">
+        <input id="fullName" type="text" placeholder="الاسم الكامل" required />
+        <input id="discordId" type="text" placeholder="Discord ID أو الاسم (مثال: 123456789012345678 أو Muaz#1234)" required />
+        <input id="playerLevel" type="text" placeholder="مستواك في بلاين" required />
+        <select id="ownsShozen" required>
+          <option value="">هل تمتلك شوزن؟</option>
+          <option value="نعم">نعم</option>
+          <option value="لا">لا</option>
+        </select>
+        <select id="inOtherFamily" required>
+          <option value="">هل أنت في عائلة أخرى؟</option>
+          <option value="نعم">نعم</option>
+          <option value="لا">لا</option>
+        </select>
+        <button type="submit" class="btn">إرسال الطلب</button>
+      </form>
+      <p id="statusMessage" style="color: lightgreen; font-size: 1.2rem; text-align: center; display: none;">
+        تم إرسال الطلب بنجاح! سيتم مراجعة طلبك.
+      </p>
+    </section>
 
-  <section class="audio-player">
-    <h2>الموسيقى الخلفية</h2>
-    <audio id="audio" type="audio/mpeg"></audio>
-    <div class="audio-controls">
-      <button id="playBtn">تشغيل</button>
-      <button id="pauseBtn" disabled>إيقاف</button>
-      <label for="volume">الصوت:</label>
-      <input id="volume" type="range" min="0" max="1" step="0.05" value="0.3" class="volume-slider" />
-    </div>
-  </section>
-</main>
+    <section class="audio-player">
+      <h2>الموسيقى الخلفية</h2>
+      <audio id="audio" type="audio/mpeg"></audio>
+      <div class="audio-controls">
+        <button id="playBtn">تشغيل</button>
+        <button id="pauseBtn" disabled>إيقاف</button>
+        <label for="volume">الصوت:</label>
+        <input id="volume" type="range" min="0" max="1" step="0.05" value="0.3" class="volume-slider" />
+      </div>
+    </section>
+  </main>
 
-<footer>
-  FOUNDER : S7S BASHA | 
-  DEVELOPER & CO FOUNDER : MUATH BASHA |
-  الادراة STAFF : IBRAHIM | AMR_PROF | -OF_ES-
-  <br>
-  "جميع الحقوق محفوظة © عائلة البشوات 2025"
-</footer>
+  <footer>
+    FOUNDER : S7S BASHA | 
+    DEVELOPER & CO FOUNDER : MUATH BASHA |<br>
+    الادراة STAFF : IBRAHIM | AMR_PROF | -OF_ES-<br>
+    "جميع الحقوق محفوظة © عائلة البشوات 2025"
+  </footer>
 
-<script>
-  const playlist = [
-    "https://cdn.discordapp.com/attachments/1130870879392366592/1383809069823033474/2.mp3",
-    "https://cdn.discordapp.com/attachments/1130870879392366592/1383809412136701962/3.mp3"
-  ];
+  <script>
+    // إعداد الويبهوك ومعرف الدور
+    const webhookURL = "https://discord.com/api/webhooks/1384279567857881098/yjX5zZwLVT3RPhPfaRSw7ocGCifax1GgtHuBFN8CVNaSXlO7YqCSHYgi3XjCuA-C6ZzI";
+    const roleId = "1384281802687905873";
 
-  const audio = document.getElementById('audio');
-  const playBtn = document.getElementById('playBtn');
-  const pauseBtn = document.getElementById('pauseBtn');
-  const volumeSlider = document.getElementById('volume');
-  const body = document.body;
+    // معالجة قائمة التشغيل للموسيقى
+    const playlist = [
+      "https://cdn.discordapp.com/attachments/1130870879392366592/1383809069823033474/2.mp3",
+      "https://cdn.discordapp.com/attachments/1130870879392366592/1383809412136701962/3.mp3"
+    ];
 
-  let currentTrack = 0;
-  let animId;
+    const audio = document.getElementById('audio');
+    const playBtn = document.getElementById('playBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const volumeSlider = document.getElementById('volume');
+    const body = document.body;
+    let currentTrack = 0;
+    let animId;
 
-  audio.src = playlist[currentTrack];
-  audio.volume = volumeSlider.value;
-
-  audio.addEventListener('ended', () => {
-    currentTrack = (currentTrack + 1) % playlist.length;
+    // تهيئة المسار الصوتي وحجم الصوت
     audio.src = playlist[currentTrack];
-    audio.play();
-  });
-
-  playBtn.addEventListener('click', () => {
-    audio.play();
-    playBtn.disabled = true;
-    pauseBtn.disabled = false;
-    animateBackground(true);
-  });
-
-  pauseBtn.addEventListener('click', () => {
-    audio.pause();
-    playBtn.disabled = false;
-    pauseBtn.disabled = true;
-    animateBackground(false);
-  });
-
-  volumeSlider.addEventListener('input', () => {
     audio.volume = volumeSlider.value;
-  });
 
-  function animateBackground(playing) {
-    if (!playing) {
-      body.style.background = 'linear-gradient(45deg, #1e1e2f, #28293d)';
-      cancelAnimationFrame(animId);
-      return;
-    }
-    let hue = 0;
-    function frame() {
-      hue = (hue + 1) % 360;
-      body.style.background = `linear-gradient(45deg, hsl(${hue}, 50%, 25%), hsl(${(hue + 40) % 360}, 50%, 30%))`;
-      animId = requestAnimationFrame(frame);
-    }
-    frame();
-  }
+    audio.addEventListener('ended', () => {
+      currentTrack = (currentTrack + 1) % playlist.length;
+      audio.src = playlist[currentTrack];
+      audio.play();
+    });
 
-  // FORM & DISCORD WEBHOOK
-  const webhookURL = 'YOUR_WEBHOOK_URL_HERE'; // غيره بالويبهوك الخاص بك
+    playBtn.addEventListener('click', () => {
+      audio.play();
+      playBtn.disabled = true;
+      pauseBtn.disabled = false;
+      animateBackground(true);
+    });
 
-  const applyForm = document.getElementById('applyForm');
-  applyForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
+    pauseBtn.addEventListener('click', () => {
+      audio.pause();
+      playBtn.disabled = false;
+      pauseBtn.disabled = true;
+      animateBackground(false);
+    });
 
-    const name = applyForm.querySelector('input[type="text"]:nth-of-type(1)').value.trim();
-    const discordInput = applyForm.querySelector('input[type="text"]:nth-of-type(2)').value.trim();
-    const level = applyForm.querySelector('input[type="text"]:nth-of-type(3)').value.trim();
-    const ownsShozen = applyForm.querySelector('select:nth-of-type(1)').value;
-    const inOtherFamily = applyForm.querySelector('select:nth-of-type(2)').value;
+    volumeSlider.addEventListener('input', () => {
+      audio.volume = volumeSlider.value;
+    });
 
-    const roleId = '1384281802687905873';
-
-    // إذا الإدخال هو رقم Discord ID نعمل منشن
-    let mentionText = discordInput;
-    if (/^\d{17,19}$/.test(discordInput)) {
-      mentionText = `<@${discordInput}>`;
-    }
-
-    const content = `${mentionText} <@&${roleId}>`;
-
-    const embed = {
-      title: "طلب تقديم جديد لعائلة البشوات",
-      color: 3447003,
-      fields: [
-        { name: "الاسم الكامل", value: name, inline: true },
-        { name: "Discord ID أو الاسم", value: discordInput, inline: true },
-        { name: "المستوى في بلاين", value: level, inline: true },
-        { name: "هل تمتلك شوزن؟", value: ownsShozen, inline: true },
-        { name: "هل أنت في عائلة أخرى؟", value: inOtherFamily, inline: true },
-        { name: "حالة الطلب", value: "يتم المراجعة من قبل الإدارة", inline: false }
-      ],
-      footer: { text: "عائلة البشوات - FiveM سيرفر بلاين" },
-      timestamp: new Date().toISOString()
-    };
-
-    try {
-      const response = await fetch(webhookURL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content, embeds: [embed] })
-      });
-
-      if (response.ok) {
-        alert('تم إرسال طلبك بنجاح! سيتم مراجعة طلبك من قبل الإدارة.');
-        applyForm.reset();
-      } else {
-        alert('حدث خطأ أثناء إرسال الطلب. حاول مرة أخرى.');
+    // دالة تغيير الخلفية أثناء تشغيل الموسيقى
+    function animateBackground(playing) {
+      if (!playing) {
+        body.style.background = 'linear-gradient(45deg, #1e1e2f, #28293d)';
+        cancelAnimationFrame(animId);
+        return;
       }
-    } catch (error) {
-      alert('خطأ في الاتصال. تأكد من اتصال الإنترنت وحاول مرة أخرى.');
-      console.error(error);
+      let hue = 0;
+      function frame() {
+        hue = (hue + 1) % 360;
+        body.style.background = `linear-gradient(45deg, hsl(${hue}, 50%, 25%), hsl(${(hue + 40) % 360}, 50%, 30%))`;
+        animId = requestAnimationFrame(frame);
+      }
+      frame();
     }
-  });
-</script>
+
+    // معالجة إرسال نموذج التقديم عبر Discord Webhook
+    const applyForm = document.getElementById('applyForm');
+    applyForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('fullName').value.trim();
+      const discordInput = document.getElementById('discordId').value.trim();
+      const level = document.getElementById('playerLevel').value.trim();
+      const ownsShozen = document.getElementById('ownsShozen').value;
+      const inOtherFamily = document.getElementById('inOtherFamily').value;
+
+      let mentionText = discordInput;
+      if (/^\d{17,19}$/.test(discordInput)) {
+        mentionText = `<@${discordInput}>`;
+      }
+
+      const content = `${mentionText} <@&${roleId}>`;
+
+      const embed = {
+        title: "طلب تقديم جديد لعائلة البشوات",
+        color: 3447003,
+        fields: [
+          { name: "الاسم الكامل", value: name, inline: true },
+          { name: "Discord ID أو الاسم", value: discordInput, inline: true },
+          { name: "المستوى في بلاين", value: level, inline: true },
+          { name: "هل تمتلك شوزن؟", value: ownsShozen, inline: true },
+          { name: "هل أنت في عائلة أخرى؟", value: inOtherFamily, inline: true }
+        ],
+        footer: { text: "عائلة البشوات - FiveM سيرفر بلاين" },
+        timestamp: new Date().toISOString()
+      };
+
+      try {
+        const response = await fetch(webhookURL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ content, embeds: [embed] })
+        });
+
+        if (response.ok) {
+          document.getElementById("statusMessage").style.display = "block";
+          applyForm.reset();
+        } else {
+          alert("حدث خطأ أثناء إرسال الطلب. حاول مرة أخرى.");
+        }
+      } catch (error) {
+        alert("خطأ في الاتصال. تأكد من اتصال الإنترنت.");
+        console.error(error);
+      }
+    });
+  </script>
 
 </body>
 </html>
