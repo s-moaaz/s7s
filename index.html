@@ -200,6 +200,7 @@
     <h2>التقديم على العائلة</h2>
     <form id="applyForm">
       <input type="text" placeholder="الاسم الكامل" required />
+      <input type="text" placeholder="Discord ID (مثال: 123456789012345678)" required />
       <input type="text" placeholder="مستواك في بلاين" required />
       <select required>
         <option value="">هل تمتلك شوزن؟</option>
@@ -294,7 +295,7 @@
 </script>
 
 <script>
-  // Webhook ديسكورد - عشان ترسل الإيمبد
+  // Webhook ديسكورد - عشان ترسل الإيمبد مع المنشن
   const applyForm = document.getElementById('applyForm');
   const webhookURL = 'https://discord.com/api/webhooks/1384279567857881098/yjX5zZwLVT3RPhPfaRSw7ocGCifax1GgtHuBFN8CVNaSXlO7YqCSHYgi3XjCuA-C6ZzI'; // حط هنا رابط Webhook الخاص بالروم عندك
 
@@ -303,40 +304,48 @@
 
     // جمع البيانات من الفورم
     const name = applyForm.querySelector('input[type="text"]:nth-of-type(1)').value;
-    const level = applyForm.querySelector('input[type="text"]:nth-of-type(2)').value;
+    const discordId = applyForm.querySelector('input[type="text"]:nth-of-type(2)').value;
+    const level = applyForm.querySelector('input[type="text"]:nth-of-type(3)').value;
     const ownsShozen = applyForm.querySelector('select:nth-of-type(1)').value;
     const inOtherFamily = applyForm.querySelector('select:nth-of-type(2)').value;
 
-    // بناء رسالة الإيمبد للديسكورد
+    // محتوى المنشن للرول
+    const roleId = '1384281802687905873';
+    const content = `<@&${roleId}>`;
+
+    // بناء الإيمبد
     const embed = {
       title: "طلب تقديم جديد لعائلة البشوات",
       color: 3447003,
       fields: [
         { name: "الاسم الكامل", value: name, inline: true },
+        { name: "Discord ID", value: discordId, inline: true },
         { name: "المستوى في بلاين", value: level, inline: true },
         { name: "هل تمتلك شوزن؟", value: ownsShozen, inline: true },
         { name: "هل أنت في عائلة أخرى؟", value: inOtherFamily, inline: true },
+        { name: "حالة الطلب", value: "يتم المراجعة من قبل الإدارة", inline: false }
       ],
       footer: { text: "عائلة البشوات - FiveM سيرفر بلاين" },
       timestamp: new Date().toISOString()
     };
 
-    // ارسال الإيمبد عبر Webhook
     try {
       const response = await fetch(webhookURL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ embeds: [embed] }),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ content, embeds: [embed] })
       });
 
       if (response.ok) {
-        alert('تم إرسال طلبك بنجاح! شكراً لتقديمك.');
+        alert('تم إرسال طلبك بنجاح! سيتم مراجعة طلبك من قبل الإدارة.');
         applyForm.reset();
       } else {
         alert('حدث خطأ أثناء إرسال الطلب. حاول مرة أخرى.');
       }
     } catch (error) {
-      alert('فشل الاتصال. تحقق من اتصال الإنترنت وحاول مرة أخرى.');
+      alert('خطأ في الاتصال. تأكد من اتصال الإنترنت وحاول مرة أخرى.');
       console.error(error);
     }
   });
