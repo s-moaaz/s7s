@@ -265,7 +265,7 @@
 
     function updateTrackName() {
       // اسم الملف فقط بدون المسار
-      const name = playlist[currentTrack].split('/').pop();
+      const name = playlist[currentTrack].split('/music.mp3').pop();
       trackNameDisplay.textContent = `تشغيل الآن: ${name}`;
     }
 
