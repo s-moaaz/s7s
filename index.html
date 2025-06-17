@@ -243,9 +243,10 @@
     const webhookURL = "https://discord.com/api/webhooks/1384279567857881098/yjX5zZwLVT3RPhPfaRSw7ocGCifax1GgtHuBFN8CVNaSXlO7YqCSHYgi3XjCuA-C6ZzI";
     const roleId = "1384281802687905873";
 
-    // قائمة تشغيل بمسار الملف المحلي فقط
+    // معالجة قائمة التشغيل للموسيقى (ملفات محلية في نفس مجلد الصفحة)
     const playlist = [
-      'music.mp3'
+      "music1.mp3",
+      "music2.mp3"
     ];
 
     const audio = document.getElementById('audio');
@@ -256,28 +257,13 @@
     let currentTrack = 0;
     let animId;
 
-    // عنصر عرض اسم المقطع تحت مشغل الصوت
-    const trackNameDisplay = document.createElement('p');
-    trackNameDisplay.style.color = 'lightblue';
-    trackNameDisplay.style.fontWeight = 'bold';
-    trackNameDisplay.style.marginTop = '10px';
-    document.querySelector('.audio-player').appendChild(trackNameDisplay);
-
-    function updateTrackName() {
-      // اسم الملف فقط بدون المسار
-      const name = playlist[currentTrack].split('/music.mp3').pop();
-      trackNameDisplay.textContent = `تشغيل الآن: ${name}`;
-    }
-
     // تهيئة المسار الصوتي وحجم الصوت
     audio.src = playlist[currentTrack];
     audio.volume = volumeSlider.value;
-    updateTrackName();
 
     audio.addEventListener('ended', () => {
       currentTrack = (currentTrack + 1) % playlist.length;
       audio.src = playlist[currentTrack];
-      updateTrackName();
       audio.play();
     });
 
